@@ -13,11 +13,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.blueGrey,
         appBar: AppBar(
             backgroundColor: Colors.redAccent,
-
             title: Text(
-                TextStyle(
-                  fontFamily: ''
-                )
                 "기본"
             )
         ),
