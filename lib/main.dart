@@ -12,12 +12,49 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.blueGrey,
         appBar: AppBar(
-            backgroundColor: Colors.redAccent,
-            title: Text(
-                "기본"
-            )
+          backgroundColor: Colors.redAccent,
+          title: Text(
+              "Login"
+          ),
         ),
+
+        body: Container(
+          color: Colors.blueAccent,
+
+          height: 400,
+          width:  400,
+
+          child : Column(
+            children:[
+              TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'User Name',
+                    hintText: 'ID please'
+                ),
+              ),
+
+              TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'User Password'
+                ),
+              ),
+              
+              ElevatedButton(
+                onPressed: null,
+                child: Text('Login'),
+              )
+
+            ]
+
+          )
+
+        ),
+
       ),
+
     );
 
   }
