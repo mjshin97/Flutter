@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
@@ -19,37 +26,37 @@ class MyApp extends StatelessWidget {
         ),
 
         body: Container(
-          color: Colors.blueAccent,
+            color: Colors.blueAccent,
 
-          height: 400,
-          width:  400,
+            height: 400,
+            width:  400,
 
-          child : Column(
-            children:[
-              TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'User Name',
-                    hintText: 'ID please'
-                ),
-              ),
+            child : Column(
+                children:[
+                  TextField(
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'User Name',
+                        hintText: 'ID please'
+                    ),
+                  ),
 
-              TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'User Password'
-                ),
-              ),
-              
-              ElevatedButton(
-                onPressed: null,
-                child: Text('Login'),
-              )
+                  TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'User Password'
+                    ),
+                  ),
 
-            ]
+                  ElevatedButton(
+                    onPressed: null,
+                    child: Text('Login'),
+                  )
 
-          )
+                ]
+
+            )
 
         ),
 
