@@ -52,9 +52,34 @@ class MyApp extends StatelessWidget {
                   ),
 
                   ElevatedButton(
-                    onPressed: null,
-                    child: Text('Login'),
+
+                      onPressed: () async {
+
+                        /////
+                        try {
+                          final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                              email: "mjshin97@naver.com" ,
+                              password: "111111"
+                          );
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'user-not-found') {
+                            print('No user found for that email.');
+                          } else if (e.code == 'wrong-password') {
+                            print('Wrong password provided for that user.');
+                          }
+                        }
+                        /////
+
+                      },
+
+
+                      child: Text('Login'),
                   )
+
+                  // ElevatedButton(
+                  //   onPressed: null,
+                  //   child: Text('Login'),
+                  // )
 
                 ]
 

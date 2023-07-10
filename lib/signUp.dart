@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+
+// import 'package:graduationproject/main.dart';
+// import 'package:graduationproject/login.dart';
+
 FirebaseAuth auth = FirebaseAuth.instance;
+
 
 void main() async{
 
@@ -24,7 +29,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.redAccent,
           title: Text(
-              "Login"
+              "Sign up"
           ),
         ),
 
@@ -53,8 +58,12 @@ class MyApp extends StatelessWidget {
                   ),
 
                   ElevatedButton(
-                    onPressed: null,
-                    child: Text('Login'),
+
+                    onPressed: () async {
+
+                    },
+
+                    child: Text('Sign Up'),
                   )
 
                 ]
@@ -68,3 +77,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
