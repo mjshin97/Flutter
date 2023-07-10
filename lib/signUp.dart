@@ -11,10 +11,11 @@ void main() async{
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
   runApp(const MyApp());
-  }
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,10 +32,10 @@ class MyApp extends StatelessWidget {
             color: Colors.blueAccent,
 
             height: 400,
-            width:  400,
+            width: 400,
 
-            child : Column(
-                children:[
+            child: Column(
+                children: [
                   TextField(
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -65,6 +66,5 @@ class MyApp extends StatelessWidget {
       ),
 
     );
-
   }
 }

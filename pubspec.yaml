@@ -42,6 +42,7 @@ dependencies:
   firebase_auth: ^4.6.3
   firebase_core_platform_interface: ^4.8.0
   firebase_messaging: ^14.6.4
+  firebase_core: ^2.14.0
   #여기까지 수정됨
 
 dev_dependencies:
