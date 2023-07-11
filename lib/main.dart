@@ -4,92 +4,142 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 FirebaseAuth auth = FirebaseAuth.instance;
 
-void main() async{
-
-  WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
-  runApp(const MyApp());
-  }
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.blueGrey,
-        appBar: AppBar(
-          backgroundColor: Colors.redAccent,
-          title: Text(
-              "Login"
+      debugShowCheckedModeBanner: false,
+      title: 'Login',
+      home: LogIn(),
+    );
+  }
+}
+
+class LogIn extends StatefulWidget {
+  @override
+  State<LogIn> createState() => _LogInState();
+}
+
+class _LogInState extends State<LogIn> {
+  TextEditingController controller = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Log in'),
+        elevation: 0.0,
+        backgroundColor: Colors.redAccent,
+        centerTitle: true,
+        leading: IconButton(icon: Icon(Icons.menu), onPressed: () {}),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.search), onPressed: () {})
+        ],
+      ),
+      // email, password 입력하는 부분을 제외한 화면을 탭하면, 키보드 사라지게 GestureDetector 사용
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Padding(padding: EdgeInsets.only(top: 50)),
+              // Center(
+              //   child: Image(
+              //     image: AssetImage('image/munji.png'),
+              //     width: 170.0,
+              //   ),
+              // ),
+              Form(
+                  child: Theme(
+                    data: ThemeData(
+                        primaryColor: Colors.grey,
+                        inputDecorationTheme: InputDecorationTheme(
+                            labelStyle: TextStyle(color: Colors.teal, fontSize: 15.0))),
+                    child: Container(
+                        padding: EdgeInsets.all(40.0),
+                        child: Builder(builder: (context) {
+                          return Column(
+                            children: [
+                              TextField(
+                                controller: controller,
+                                autofocus: true,
+                                decoration: InputDecoration(labelText: 'Enter email'),
+                                keyboardType: TextInputType.emailAddress,
+                              ),
+                              TextField(
+                                controller: controller2,
+                                decoration:
+                                InputDecoration(labelText: 'Enter password'),
+                                keyboardType: TextInputType.text,
+                                obscureText: true, // 비밀번호 안보이도록 하는 것
+                              ),
+                              SizedBox(
+                                height: 40.0,
+                              ),
+                              ButtonTheme(
+                                  minWidth: 100.0,
+                                  height: 50.0,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      if (controller.text == 'mei@hello.com' &&
+                                          controller2.text == '1234') {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (BuildContext context) =>
+                                                    NextPage()));
+                                      }
+                                      else if (controller.text == 'mei@hello.com' && controller2.text != '1234') {
+                                        showSnackBar(context, Text('Wrong password'));
+                                      }
+                                      else if (controller.text != 'mei@hello.com' && controller2.text == '1234') {
+                                        showSnackBar(context, Text('Wrong email'));
+                                      }
+                                      else {
+                                        showSnackBar(context, Text('Check your info again'));
+                                      }
+                                    },
+                                    child: Icon(
+                                      Icons.arrow_forward,
+                                      color: Colors.white,
+                                      size: 35.0,
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.orangeAccent),
+                                  ))
+                            ],
+                          );
+                        })),
+                  ))
+            ],
           ),
         ),
-
-        body: Container(
-            color: Colors.blueAccent,
-
-            height: 400,
-            width:  400,
-
-            child : Column(
-                children:[
-                  TextField(
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'User Name',
-                        hintText: 'ID please'
-                    ),
-                  ),
-
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'User Password'
-                    ),
-                  ),
-
-                  ElevatedButton(
-
-                      onPressed: () async {
-
-                        /////로그인 로직 구현중(입력 파라미터를 받아서 검사)
-                        try {
-                          final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                              email: "mjshin97@naver.com" ,
-                              password: "111111"
-                          );
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'user-not-found') {
-                            print('No user found for that email.');
-                          } else if (e.code == 'wrong-password') {
-                            print('Wrong password provided for that user.');
-                          }
-                        }
-                        /////
-
-                      },
-
-
-                      child: Text('Login'),
-                  )
-
-                  // ElevatedButton(
-                  //   onPressed: null,
-                  //   child: Text('Login'),
-                  // )
-
-                ]
-
-            )
-
-        ),
-
       ),
-
     );
+  }
+}
 
+void showSnackBar(BuildContext context, Text text) {
+  final snackBar = SnackBar(
+    content: text,
+    backgroundColor: Color.fromARGB(255, 112, 48, 48),
+  );
+
+// Find the ScaffoldMessenger in the widget tree
+// and use it to show a SnackBar.
+  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+}
+
+class NextPage extends StatelessWidget {
+  const NextPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
