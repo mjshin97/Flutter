@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
 
                       onPressed: () async {
 
-                        /////
+                        /////로그인 로직 구현중(입력 파라미터를 받아서 검사)
                         try {
                           final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
                               email: "mjshin97@naver.com" ,
