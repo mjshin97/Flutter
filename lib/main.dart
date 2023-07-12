@@ -86,7 +86,7 @@ class _LogInState extends State<LogIn> {
                                   height: 50.0,
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      if (controller.text == 'mei@hello.com' &&
+                                      if (controller.text == 'minjun@hello.com' &&
                                           controller2.text == '1234') {
                                         Navigator.push(
                                             context,
@@ -95,16 +95,18 @@ class _LogInState extends State<LogIn> {
                                                 /////////////////////////////////////////
 
                                                       AppBar(
-                                                          title: Text('Log in Success')
+                                                          title: Text(controller.text)
                                                       )
 
+
                                                 /////////////////////////////////////////
+
                                                     ));
                                       }
-                                      else if (controller.text == 'mei@hello.com' && controller2.text != '1234') {
+                                      else if (controller.text == 'minjun@hello.com' && controller2.text != '1234') {
                                         showSnackBar(context, Text('Wrong password'));
                                       }
-                                      else if (controller.text != 'mei@hello.com' && controller2.text == '1234') {
+                                      else if (controller.text != 'minjun@hello.com' && controller2.text == '1234') {
                                         showSnackBar(context, Text('Wrong email'));
                                       }
                                       else {
