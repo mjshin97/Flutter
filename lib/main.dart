@@ -92,11 +92,14 @@ class _LogInState extends State<LogIn> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (BuildContext context) =>
-                                                    Text(
+                                                /////////////////////////////////////////
 
-                                                        controller.text
+                                                      AppBar(
+                                                          title: Text('Log in Success')
+                                                      )
 
-                                                    )));
+                                                /////////////////////////////////////////
+                                                    ));
                                       }
                                       else if (controller.text == 'mei@hello.com' && controller2.text != '1234') {
                                         showSnackBar(context, Text('Wrong password'));
